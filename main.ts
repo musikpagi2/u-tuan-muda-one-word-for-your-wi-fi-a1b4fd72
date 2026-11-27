@@ -10,9 +10,13 @@ import { join } from "node:path";
 
 const WORD = "peekaboo";
 
+function writeEntry(dir: string, text: string): void {
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, "entry.txt"), text, "utf8");
+}
+
 // The grader runs the program with its output directory set via
 // MAKEFUN_OUTPUT_DIR; fall back to the competition's /output path.
 const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 
-mkdirSync(outputDir, { recursive: true });
-writeFileSync(join(outputDir, "entry.txt"), WORD, "utf8");
+writeEntry(outputDir, WORD);
